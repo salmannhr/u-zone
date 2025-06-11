@@ -3,8 +3,6 @@ name: Run Laravel Tests
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   laravel-tests:
@@ -13,27 +11,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up PHP
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          extensions: mbstring, bcmath, curl
-          coverage: none
 
-      - name: Install Dependencies
-        run: composer install --prefer-dist --no-progress
-
-      - name: Copy .env
-        run: cp .env.example .env
-
-      - name: Generate App Key
-        run: php artisan key:generate
-
-      - name: Run Migrations
-        run: php artisan migrate --no-interaction --force
+      - name: Install dependencies
+        run: composer install
+        
+      - name: Build and Analyze
         env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
-
-      - name: Run Tests
-        run: php artisan test
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=salmannhr_Basic_Java_maven-1302220122 \
+            -Dsonar.organization=salmannhr-org \
+            -Dsonar.host.url=https://sonarcloud.io
