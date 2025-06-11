@@ -1,0 +1,5 @@
+Run Xampp
+
+Run Web using "php artisan schedule:work" the "php artisan serve" command
+
+Jika ingin menghapus file secara langsung dapat menggunakan command "php artisan media:clean-old"
