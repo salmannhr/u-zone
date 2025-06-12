@@ -9,13 +9,13 @@ Route::get('/about', [MediaController::class, 'about'])->name('about');
 Route::post('/upload', [MediaController::class, 'upload'])->middleware('auth')->name('upload');
 
 // Authentication views
-Route::get('/login', function () {
+Route::get('/login',  () {
     return view('login');
 })->name('login.view');
 
-Route::get('/signup', function () {
+Route::get('/signup', functio () {
     return view('signup');
-})->name('signup.view');
+})->name('signup.view')
 
 // Authentication actions
 Route::post('/login', [MediaController::class, 'login'])->name('login');
