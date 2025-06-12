@@ -9,7 +9,7 @@ Route::get('/about', [MediaController::class, 'about'])->name('about');
 Route::post('/upload', [MediaController::class, 'upload'])->middleware('auth')->name('upload');
 
 // Authentication views
-Route::get('/login', functio () {
+Route::get('/login', function () {
     return view('login');
 })->name('login.view');
 
